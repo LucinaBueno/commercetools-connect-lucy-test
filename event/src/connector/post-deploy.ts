@@ -16,9 +16,9 @@ async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   assertString(projectId, CONNECT_GCP_PROJECT_ID_KEY);
 
   const apiRoot = createApiRoot();
-  //await createCustomerCreateSubscription(apiRoot, topicName, projectId);
-  await deleteCustomerCreateSubscription(apiRoot);
-  await createProductPublishedSubscription(apiRoot, topicName, projectId);
+  await createCustomerCreateSubscription(apiRoot, topicName, projectId);
+  //await deleteCustomerCreateSubscription(apiRoot);
+  //await createProductPublishedSubscription(apiRoot, topicName, projectId);
 }
 
 async function run(): Promise<void> {
