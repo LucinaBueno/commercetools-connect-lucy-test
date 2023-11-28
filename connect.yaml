@@ -45,21 +45,16 @@ deployAs:
     configuration:
       standardConfiguration:
         - key: CTP_REGION
-          require: true
           description: commercetools Composable Commerce API region
       securedConfiguration:
         - key: CTP_PROJECT_KEY
           description: commercetools Composable Commerce project key
-          require: true
         - key: CTP_CLIENT_ID
           description: commercetools Composable Commerce client ID
-          require: true
         - key: CTP_CLIENT_SECRET
           description: commercetools Composable Commerce client secret
-          require: true
         - key: CTP_SCOPE
           description: commercetools Composable Commerce client scope
-          require: true
   # - name: mc-app
   #   applicationType: mc-app
   #   endpoint: /
