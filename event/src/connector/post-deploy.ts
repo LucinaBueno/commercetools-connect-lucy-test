@@ -18,7 +18,7 @@ async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   const apiRoot = createApiRoot();
   await createCustomerCreateSubscription(apiRoot, topicName, projectId);
   //await deleteCustomerCreateSubscription(apiRoot);
-  //await createProductPublishedSubscription(apiRoot, topicName, projectId);
+  await createProductPublishedSubscription(apiRoot, topicName, projectId);
 }
 
 async function run(): Promise<void> {

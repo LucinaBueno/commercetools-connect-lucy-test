@@ -4,7 +4,7 @@ const CUSTOMER_CREATE_SUBSCRIPTION_KEY = 'myconnector-customerCreateSubscription
 const PRODUCT_PUBLISHED_SUBSCRIPTION_KEY = 'myconnector-productPublishedSubscription';
 
 export async function createProductPublishedSubscription(
-apiRoot: ByProjectKeyRequestBuilder,
+  apiRoot: ByProjectKeyRequestBuilder,
   topicName: string,
   projectId: string
 ): Promise<void> {
