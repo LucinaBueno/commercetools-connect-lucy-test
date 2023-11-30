@@ -3,6 +3,7 @@ import { ByProjectKeyRequestBuilder } from '@commercetools/platform-sdk/dist/dec
 const CUSTOMER_CREATE_SUBSCRIPTION_KEY = 'myconnector-customerCreateSubscription';
 const PRODUCT_PUBLISHED_SUBSCRIPTION_KEY = 'myconnector-productPublishedSubscription';
 const ORDER_CREATED_SUBSCRIPTION_KEY = 'myconnector-orderCreatedSubscription';
+const INVENTORY_ENTRY_SUBSCRIPTION_KEY = 'myconnector-inventoryEntrySubscription';
 
 export async function createProductPublishedSubscription(
   apiRoot: ByProjectKeyRequestBuilder,
@@ -155,6 +156,86 @@ export async function deleteOrderCreatedSubscription(
     await apiRoot
       .subscriptions()
       .withKey({ key: ORDER_CREATED_SUBSCRIPTION_KEY })
+      .delete({
+        queryArgs: {
+          version: subscription.version,
+        },
+      })
+      .execute();
+  }
+}
+
+export async function createInventoryEntrySubscription(
+  apiRoot: ByProjectKeyRequestBuilder,
+  topicName: string,
+  projectId: string
+): Promise<void> {
+  const {
+    body: { results: subscriptions },
+  } = await apiRoot
+    .subscriptions()
+    .get({
+      queryArgs: {
+        where: `key = "${INVENTORY_ENTRY_SUBSCRIPTION_KEY}"`,
+      },
+    })
+    .execute();
+
+  if (subscriptions.length > 0) {
+    const subscription = subscriptions[0];
+
+    await apiRoot
+      .subscriptions()
+      .withKey({ key: INVENTORY_ENTRY_SUBSCRIPTION_KEY })
+      .delete({
+        queryArgs: {
+          version: subscription.version,
+        },
+      })
+      .execute();
+  }
+
+  await apiRoot
+    .subscriptions()
+    .post({
+      body: {
+        key: INVENTORY_ENTRY_SUBSCRIPTION_KEY,
+        destination: {
+          type: 'GoogleCloudPubSub',
+          topic: topicName,
+          projectId,
+        },
+        messages: [
+          {
+            resourceTypeId: 'inventory-entry',
+            types: [],
+          },
+        ],
+      },
+    })
+    .execute();
+}
+
+export async function deleteInventoryEntrySubscription(
+  apiRoot: ByProjectKeyRequestBuilder
+): Promise<void> {
+  const {
+    body: { results: subscriptions },
+  } = await apiRoot
+    .subscriptions()
+    .get({
+      queryArgs: {
+        where: `key = "${INVENTORY_ENTRY_SUBSCRIPTION_KEY}"`,
+      },
+    })
+    .execute();
+
+  if (subscriptions.length > 0) {
+    const subscription = subscriptions[0];
+
+    await apiRoot
+      .subscriptions()
+      .withKey({ key: INVENTORY_ENTRY_SUBSCRIPTION_KEY })
       .delete({
         queryArgs: {
           version: subscription.version,
