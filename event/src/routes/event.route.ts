@@ -22,8 +22,9 @@ eventRouter.post('/', async (req, res) => {
   if (body.message !== undefined && body.message.data !== undefined) {
     const encodedData = body.message.data;
 
-    let buff = new Buffer(encodedData, 'base64');
-    let decodedData = buff.toString('ascii');
+    const decodedData = Buffer.from(encodedData, 'base64').toString('utf8');
+    //let buff = new Buffer(encodedData, 'base64');
+    //let decodedData = buff.toString('ascii');
 
     console.log('-> Decoded event data:', decodedData);
 
