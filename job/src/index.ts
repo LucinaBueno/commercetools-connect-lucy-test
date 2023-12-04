@@ -21,14 +21,6 @@ const PORT = 8080;
 const app: Express = express();
 app.disable('x-powered-by');
 
-const ctpProjectKey = process.env.CTP_PROJECT_KEY as string;
-const ogClientId = process.env.OG_CLIENT_ID as string;
-const ogClientSecret = process.env.OG_CLIENT_SECRET as string;
-
-logger.info('-> CTP_PROJECT_KEY:' + ctpProjectKey);
-logger.info('-> OG_CLIENT_ID:' + ogClientId);
-logger.info('-> OG_CLIENT_SECRET:' + ogClientSecret);
-
 // Define routes
 app.use('/job', JobRoutes);
 
