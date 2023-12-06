@@ -9,7 +9,8 @@ const jobRouter: Router = Router();
 
 jobRouter.post('/', async (req, res, next) => {
   try {
-    logger.info('-> Job request /');
+    logger.info('-> Job request:', req);
+    logger.info('-> Job request.query:', req.query);
 
     const ctpProjectKey = process.env.CTP_PROJECT_KEY as string;
     const ogClientId = process.env.OG_CLIENT_ID as string;
@@ -84,24 +85,6 @@ jobRouter.post('/', async (req, res, next) => {
     next();
   } catch (error) {
     logger.info('Error at job.route.js / -> ', error);
-    next(error);
-  }
-});
-
-jobRouter.post('/syncProducts', async (req, res, next) => {
-  try {
-    logger.info('-> Job request /syncProducts');
-    const ctpProjectKey = process.env.CTP_PROJECT_KEY as string;
-    const ogClientId = process.env.OG_CLIENT_ID as string;
-    const ogClientSecret = process.env.OG_CLIENT_SECRET as string;
-
-    logger.info('-> /syncProducts CTP_PROJECT_KEY:' + ctpProjectKey);
-    logger.info('-> /syncProducts OG_CLIENT_ID:' + ogClientId);
-    logger.info('-> /syncProducts OG_CLIENT_SECRET:' + ogClientSecret);
-
-    next();
-  } catch (error) {
-    logger.info('Error at job.route.js /syncProducts -> ', error);
     next(error);
   }
 });
