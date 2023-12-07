@@ -22,7 +22,7 @@ deployAs:
     applicationType: job
     endpoint: /
     properties:
-      schedule: "*/50 * * * *"
+      schedule: "*/1 * * * *"
     configuration:
       standardConfiguration:
         - key: CTP_REGION
@@ -40,7 +40,7 @@ deployAs:
           description: Ordergroove API client ID
         - key: OG_CLIENT_SECRET
           description: Ordergroove API client secret
-  - name: event
+  - name: sync-products
     applicationType: event
     endpoint: /event
     scripts:
