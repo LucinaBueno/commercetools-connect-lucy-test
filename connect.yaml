@@ -18,9 +18,9 @@ deployAs:
           description: commercetools Composable Commerce client secret
         - key: CTP_SCOPE
           description: commercetools Composable Commerce client scope
-  - name: job
+  - name: initial-product-loading
     applicationType: job
-    endpoint: /job
+    endpoint: /initial-product-loading
     properties:
       schedule: "*/50 * * * *"
     configuration:
