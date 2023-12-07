@@ -20,7 +20,7 @@ deployAs:
           description: commercetools Composable Commerce client scope
   - name: initial-product-loading
     applicationType: job
-    endpoint: /initial-product-loading
+    endpoint: /
     properties:
       schedule: "*/50 * * * *"
     configuration:
