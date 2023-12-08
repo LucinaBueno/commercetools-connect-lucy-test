@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
 import { allOrders } from '../orders/fetch.orders';
+import { getProductProjections } from '../services/commercetools/fetch.products';
 
 /**
  * Exposed job endpoint.
@@ -13,6 +14,10 @@ import { allOrders } from '../orders/fetch.orders';
  */
 export const post = async (_request: Request, response: Response) => {
   try {
+    // Get the products
+    const products = await getProductProjections({ limit: 100 });
+    logger.info('>> getProductProjections: ', products);
+
     // Get the orders
     const limitedOrdersObject = await allOrders({ sort: ['lastModifiedAt'] });
     logger.info(`There are ${limitedOrdersObject.total} orders!`);
