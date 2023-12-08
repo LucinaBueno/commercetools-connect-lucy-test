@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
 import { allOrders } from '../orders/fetch.orders';
-import { getProductProjections } from '../services/commercetools/fetch.products';
+import { getProductProjections } from '../services/commercetools/fetch-products';
 
 /**
  * Exposed job endpoint.
