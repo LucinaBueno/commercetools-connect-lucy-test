@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals'
-import { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk';
+import { ProductProjectionPagedQueryResponse } from '@commercetools/platform-sdk'
 
 import { extractProductVariants } from './extract-product-variants'
 import { getStandalonePriceBySkuAndCurrencyCode } from './get-standalone-price'
@@ -126,8 +126,8 @@ describe('extractProductVariants', () => {
   })
 
    it('should call getStandalonePriceBySkuAndCurrencyCode() function 2 times', async () => {
-    const result = await extractProductVariants(productProjectionPagedQueryResponse)
+    await extractProductVariants(productProjectionPagedQueryResponse)
 
-    expect(getStandalonePriceBySkuAndCurrencyCode).toHaveBeenCalledTimes(2);
+    expect(getStandalonePriceBySkuAndCurrencyCode).toHaveBeenCalledTimes(2)
   })
 })

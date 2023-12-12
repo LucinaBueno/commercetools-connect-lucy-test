@@ -109,7 +109,7 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
     }
     console.log('>>>> products variants for ordergroove:' + variantsResult.length);
   } catch (error) {
-    logger.info('Error extracting the product variants from ProductProjectionPagedQueryResponse:', error);
+    logger.error('Error extracting the product variants from ProductProjectionPagedQueryResponse:', error);
     throw error;
   }
 }

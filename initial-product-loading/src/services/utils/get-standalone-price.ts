@@ -18,7 +18,7 @@ export const getStandalonePriceBySkuAndCurrencyCode = async (sku: string, curren
       }
     }
   } catch (error) {
-    logger.info(`Error getting the StandalonePrice for sku ${sku}: `, error);
+    logger.error(`Error getting StandalonePrice for sku ${sku}: `, error);
   }
 
   return result;
