@@ -9,8 +9,8 @@ const jobRouter: Router = Router();
 
 jobRouter.post('/', async (req, res, next) => {
   try {
-    logger.info('-> Job request:', req);
-    logger.info('-> Job request.query:', req.query);
+    //logger.info('-> Job request:', req);
+    //logger.info('-> Job request.query:', req.query);
 
     const ctpProjectKey = process.env.CTP_PROJECT_KEY as string;
     const ogClientId = process.env.OG_CLIENT_ID as string;

@@ -22,7 +22,7 @@ deployAs:
     applicationType: job
     endpoint: /
     properties:
-      schedule: "*/1 * * * *"
+      schedule: "*/2 * * * *"
     configuration:
       standardConfiguration:
         - key: CTP_REGION
@@ -36,6 +36,10 @@ deployAs:
           description: commercetools Composable Commerce client secret
         - key: CTP_SCOPE
           description: commercetools Composable Commerce client scope
+        - key: CTP_LANGUAGE_CODE
+          description: commercetools Composable Commerce language code
+        - key: CTP_CURRENCY_CODE
+          description: commercetools Composable Commerce currency code
         - key: OG_CLIENT_ID
           description: Ordergroove API client ID
         - key: OG_CLIENT_SECRET
