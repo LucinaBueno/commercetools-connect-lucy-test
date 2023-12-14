@@ -40,10 +40,8 @@ deployAs:
           description: commercetools Composable Commerce client secret
         - key: CTP_SCOPE
           description: commercetools Composable Commerce client scope
-        - key: OG_CLIENT_ID
-          description: Ordergroove API client ID
-        - key: OG_CLIENT_SECRET
-          description: Ordergroove API client secret
+        - key: OG_API_KEY
+          description: Ordergroove API key
   - name: event
     applicationType: event
     endpoint: /event
@@ -63,10 +61,8 @@ deployAs:
           description: commercetools Composable Commerce client secret
         - key: CTP_SCOPE
           description: commercetools Composable Commerce client scope
-        - key: OG_CLIENT_ID
-          description: Ordergroove client ID
-        - key: OG_CLIENT_SECRET
-          description: Ordergroove client secret
+        - key: OG_API_KEY
+          description: Ordergroove API key
   # - name: mc-app
   #   applicationType: mc-app
   #   endpoint: /

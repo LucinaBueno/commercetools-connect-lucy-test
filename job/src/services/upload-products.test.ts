@@ -3,12 +3,8 @@ import { jest } from '@jest/globals'
 import { uploadProducts } from './upload-products'
 import { getProductProjections } from './commercetools/products-api'
 import { extractProductVariants } from './utils/extract-product-variants'
+import { createProducts } from './ordergroove/products-api'
 
-jest.mock('./utils/extract-product-variants', () => {
-  return {
-    extractProductVariants: jest.fn()
-  }
-})
 jest.mock('./commercetools/products-api', () => {
   return {
     getProductProjections: jest.fn().mockReturnValue(
@@ -100,6 +96,37 @@ jest.mock('./commercetools/products-api', () => {
     ),
   }
 })
+jest.mock('./utils/extract-product-variants', () => {
+  return {
+    extractProductVariants: jest.fn().mockReturnValue(
+      [
+        {
+          "product_id": 'WFJS',
+          "sku": 'WFJS',
+          "name": 'Product WFJS',
+          "price": 150.5,
+          "live": true,
+          "image_url": '',
+          "detail_url": ''
+        },
+        {
+          "product_id": 'WFJM',
+          "sku": 'WFJM',
+          "name": 'Product WFJM',
+          "price": 150.5,
+          "live": true,
+          "image_url": '',
+          "detail_url": ''
+        }
+      ]
+    )
+  }
+})
+jest.mock('./ordergroove/products-api', () => {
+  return {
+    createProducts: jest.fn()
+  }
+})
 
 describe('uploadProducts', () => {
   afterEach(() => {
@@ -107,10 +134,11 @@ describe('uploadProducts', () => {
     jest.restoreAllMocks()
   })
 
-   it('should call getProductProjections() function one time', async () => {
+  it('should call getProductProjections(), extractProductVariants() and createProducts() functions', async () => {
     await uploadProducts(100, 0)
 
     expect(getProductProjections).toHaveBeenCalledTimes(1)
     expect(extractProductVariants).toHaveBeenCalledTimes(1)
+    expect(createProducts).toHaveBeenCalledTimes(1)
   })
 })

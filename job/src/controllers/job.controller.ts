@@ -17,6 +17,7 @@ export const post = async (_request: Request, response: Response) => {
         ? false : _request.query.startUpload === 'true' ? true : false;
 
     if (executeInitialUpload) {
+      logger.info('>> Starting the initial products load from commercetools to ordergroove <<');
       await uploadProducts(100, 0);
     }
 

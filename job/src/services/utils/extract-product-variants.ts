@@ -1,13 +1,3 @@
-interface OrdergrooveProduct {
-  product_id: string;
-  sku: string;
-  name: string;
-  price: number;
-  live: boolean;
-  image_url: string;
-  detail_url: string;
-}
-
 import {
   ProductProjection,
   ProductVariant,
@@ -20,14 +10,14 @@ import {
 import { logger } from '../../utils/logger.utils';
 import { getStandalonePriceBySkuAndCurrencyCode } from './get-standalone-price';
 import { addDecimalPointToCentAmount } from './data-helper';
+import { OrdergrooveProduct } from '../../types/custom.types';
 
 const LANGUAGE_CODE = process.env.CTP_LANGUAGE_CODE as string;
 const CURRENCY_CODE = process.env.CTP_CURRENCY_CODE as string;
 
-export const extractProductVariants = async (productProjectionPagedQueryResponse: ProductProjectionPagedQueryResponse) => {
+export const extractProductVariants = async (productProjectionPagedQueryResponse: ProductProjectionPagedQueryResponse): Promise<OrdergrooveProduct[]> => {
+  let variantsResult = new Array<OrdergrooveProduct>;
   try {
-    let variantsResult = new Array();
-
     const results: Array<ProductProjection> =  Object.values(productProjectionPagedQueryResponse.results);
 
     for (let i = 0; i < results.length; i++) {
@@ -43,8 +33,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
           logger.info(getInvalidPriceMessage(masterVariantSku));
         } else {
           let ogProduct: OrdergrooveProduct = {
-             product_id: masterVariantSku,
-             sku: masterVariantSku,
+             product_id: '2'+masterVariantSku,
+             sku: '2'+masterVariantSku,
              name: productName,
              price: masterVariantStandalonePrice,
              live: isProductOnStock(result.masterVariant.availability),
@@ -55,8 +45,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
         }
       } else {
         let ogProduct: OrdergrooveProduct = {
-           product_id: masterVariantSku,
-           sku: masterVariantSku,
+           product_id: '2'+masterVariantSku,
+           sku: '2'+masterVariantSku,
            name: productName,
            price: masterVariantEmbeddedPrice,
            live: isProductOnStock(result.masterVariant.availability),
@@ -83,8 +73,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
             logger.info(getInvalidPriceMessage(variantSku));
           } else {
             let ogProduct: OrdergrooveProduct = {
-               product_id: variantSku,
-               sku: variantSku,
+               product_id: '2'+variantSku,
+               sku: '2'+variantSku,
                name: productName,
                price: variantStandalonePrice,
                live: isProductOnStock(variant.availability),
@@ -95,8 +85,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
           }
         } else {
           let ogProduct: OrdergrooveProduct = {
-             product_id: variantSku,
-             sku: variantSku,
+             product_id: '2'+variantSku,
+             sku: '2'+variantSku,
              name: productName,
              price: variantEmbeddedPrice,
              live: isProductOnStock(variant.availability),
@@ -107,11 +97,12 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
         }
       }
     }
-    console.log('>>>> products variants for ordergroove:' + variantsResult.length);
+    logger.info(`Extracted ${variantsResult.length} product variants`);
   } catch (error) {
     logger.error('Error extracting the product variants from ProductProjectionPagedQueryResponse:', error);
-    throw error;
   }
+
+  return variantsResult;
 }
 
 function getPrice(productPrices?: Price[]) {
