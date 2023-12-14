@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 import { logger } from '../../utils/logger.utils';
 import { OrdergrooveProduct } from '../../types/custom.types';
 import { createUUID } from '../utils/data-helper';
