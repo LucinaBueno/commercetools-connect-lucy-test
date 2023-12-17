@@ -1,7 +1,29 @@
 import { Request, Response } from 'express';
+import { CreatedBy, MessageDeliveryPayload, Order, ProductProjection } from '@commercetools/platform-sdk';
+
 import { createApiRoot } from '../client/create.client';
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
+
+export interface CtEventPayload extends MessageDeliveryPayload {
+  notificationType: 'Message';
+  projectKey: string;
+  id: string;
+  version: number;
+  sequenceNumber: number;
+  resource: {
+    typeId: 'product' | 'order' | 'inventory-entry';
+    id: string;
+  };
+  resourceVersion: number;
+  type: 'ProductPublished' | 'OrderCreated' | 'InventoryEntryQuantitySet' | 'InventoryEntryDeleted' | 'InventoryEntryCreated';
+  order?: Order;
+  productProjection?: ProductProjection;
+  createdAt: string;
+  lastModifiedAt: string;
+  createdBy: CreatedBy;
+  lastModifiedBy: CreatedBy;
+}
 
 /**
  * Exposed event POST endpoint.
@@ -12,6 +34,15 @@ import { logger } from '../utils/logger.utils';
  * @returns
  */
 export const post = async (request: Request, response: Response) => {
+  logger.info('>>>>>>>>> Controller request:', request);
+  logger.info('>>>>>>>>> Controller request.body:', request.body);
+  logger.info('>>>>>>>>> Controller request.body.message:', request.body.message);
+
+  const payload: CtEventPayload = JSON.parse(
+    Buffer.from(request.body.message.data, 'base64').toString('utf8')
+  ).data;
+  logger.info('>>>>>>>>> Controller payload:', payload);
+
   let customerId = undefined;
 
   // Check request body
