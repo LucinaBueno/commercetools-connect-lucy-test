@@ -33,8 +33,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
           logger.info(getInvalidPriceMessage(masterVariantSku));
         } else {
           let ogProduct: OrdergrooveProduct = {
-             product_id: '2'+masterVariantSku,
-             sku: '2'+masterVariantSku,
+             product_id: masterVariantSku,
+             sku: masterVariantSku,
              name: productName,
              price: masterVariantStandalonePrice,
              live: isProductOnStock(result.masterVariant.availability),
@@ -45,8 +45,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
         }
       } else {
         let ogProduct: OrdergrooveProduct = {
-           product_id: '2'+masterVariantSku,
-           sku: '2'+masterVariantSku,
+           product_id: masterVariantSku,
+           sku: masterVariantSku,
            name: productName,
            price: masterVariantEmbeddedPrice,
            live: isProductOnStock(result.masterVariant.availability),
@@ -73,8 +73,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
             logger.info(getInvalidPriceMessage(variantSku));
           } else {
             let ogProduct: OrdergrooveProduct = {
-               product_id: '2'+variantSku,
-               sku: '2'+variantSku,
+               product_id: variantSku,
+               sku: variantSku,
                name: productName,
                price: variantStandalonePrice,
                live: isProductOnStock(variant.availability),
@@ -85,8 +85,8 @@ export const extractProductVariants = async (productProjectionPagedQueryResponse
           }
         } else {
           let ogProduct: OrdergrooveProduct = {
-             product_id: '2'+variantSku,
-             sku: '2'+variantSku,
+             product_id: variantSku,
+             sku: variantSku,
              name: productName,
              price: variantEmbeddedPrice,
              live: isProductOnStock(variant.availability),

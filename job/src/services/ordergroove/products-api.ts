@@ -29,6 +29,8 @@ export const createProducts = async (products: Array<OrdergrooveProduct>, attemp
         return response.json();
       }
 
+      // TODO 
+
       throw new Error(`status ${response.status}`);
     })
     .then((data) => {

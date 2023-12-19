@@ -52,6 +52,10 @@ deployAs:
       standardConfiguration:
         - key: CTP_REGION
           description: commercetools Composable Commerce API region
+        - key: CTP_LANGUAGE_CODE
+          description: commercetools Composable Commerce language code
+        - key: CTP_CURRENCY_CODE
+          description: commercetools Composable Commerce currency code
       securedConfiguration:
         - key: CTP_PROJECT_KEY
           description: commercetools Composable Commerce project key
