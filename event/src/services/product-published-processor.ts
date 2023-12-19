@@ -13,10 +13,6 @@ export const processEventProductPublished = async (payload : CtEventPayload) : P
       const execution_id = createUUID();
       const ogRetrieveResponse: OrdergrooveApiResponse = await retrieveOgProduct(ctProduct.product_id, execution_id);
 
-      console.log('>>>>>>>>>>>>');
-      logger.info('Product in ct:', ctProduct);
-      console.log('Product in og:', ogRetrieveResponse);
-
       if (ogRetrieveResponse.product === undefined) {
         const newProducts = new Array();
         newProducts.push(ctProduct);

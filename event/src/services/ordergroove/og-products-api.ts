@@ -80,16 +80,17 @@ export const createProducts = async (products: Array<OrdergrooveProduct>, execut
           return response.json();
         }
 
+        logger.info('createProducts response:', response);
         throw new Error(`Status ${response.status}`);
       })
       .then((data) => {
-        logger.info(`Response during the process[${executionId}] of creating a new product in ordergroove: ${JSON.stringify(data)}`);
+        logger.info(`Response during the process[${executionId}] of creating products in ordergroove: ${JSON.stringify(data)}`);
       })
       .catch((error) => {
-        logger.error(`Error ocurred during the process[${executionId}] of creating a new product in ordergroove.`, error);
+        logger.error(`Error ocurred during the process[${executionId}] of creating products in ordergroove.`, error);
       });
   } catch (error) {
-    logger.error(`Error ocurred during the process[${executionId}] of creating a new product in ordergroove.`, error);
+    logger.error(`Error ocurred during the process[${executionId}] of creating products in ordergroove.`, error);
   }
 
   return result;
@@ -117,16 +118,17 @@ export const updateProducts = async (products: Array<OrdergrooveProduct>, execut
           return response.json();
         }
 
+        logger.info('updateProducts response:', response);
         throw new Error(`Status ${response.status}`);
       })
       .then((data) => {
-        logger.info(`Response during the process[${executionId}] of updating a product in ordergroove: ${JSON.stringify(data)}`);
+        logger.info(`Response during the process[${executionId}] of updating products in ordergroove: ${JSON.stringify(data)}`);
       })
       .catch((error) => {
-        logger.error(`Error ocurred during the process[${executionId}] of updating a product in ordergroove.`, error);
+        logger.error(`Error ocurred during the process[${executionId}] of updating products in ordergroove.`, error);
       });
   } catch (error) {
-    logger.error(`Error ocurred during the process[${executionId}] of updating a product in ordergroove.`, error);
+    logger.error(`Error ocurred during the process[${executionId}] of updating products in ordergroove.`, error);
   }
 
   return result;
