@@ -105,7 +105,7 @@ export const updateProducts = async (products: Array<OrdergrooveProduct>, execut
 
   try {
     await fetch(productsBatchUpdateUrl, {
-      method: 'POST',
+      method: 'PATCH',
       body: JSON.stringify(products),
       headers
     })
