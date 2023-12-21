@@ -19,8 +19,10 @@ export const processInventoryEntryEvent = async (payload: CtEventPayload): Promi
     } else {
       const ogProductResponse: OrdergrooveApiResponse = await retrieveOgProduct(sku, execution_id);
       const ogProduct: OrdergrooveProduct | undefined = ogProductResponse.product;
+      logger.info('--> processInventoryEntryEvent, ogProduct:' + JSON.stringify(ogProduct));
 
       const ctProductVariant: ProductVariant = await getProductVariantBySku(sku);
+      logger.info('--> processInventoryEntryEvent, ctProductVariant:' + JSON.stringify(ctProductVariant));
       const isCtProductOnStock = isProductOnStock(ctProductVariant.availability);
 
       if (ogProduct !== undefined && ogProduct.live !== isCtProductOnStock) {
@@ -32,6 +34,8 @@ export const processInventoryEntryEvent = async (payload: CtEventPayload): Promi
         if (!ogUpdateResponse.success && ogUpdateResponse.status === 500) {
           await updateProducts(updProducts, execution_id);
         }
+      } else {
+        logger.info(`[${execution_id}] The inventory of the product with sku ${sku} does not need an update in ordergroove.`);
       }
     }
   } catch (error) {
