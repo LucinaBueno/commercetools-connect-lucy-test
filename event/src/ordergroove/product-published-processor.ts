@@ -1,7 +1,7 @@
 import { logger } from '../utils/logger.utils';
 import { CtEventPayload, OrdergrooveProduct, OrdergrooveApiResponse } from '../types/custom.types';
 import { extractProductVariants } from './helpers/products-helper';
-import { retrieveOgProduct, createProducts, updateProducts } from './ordergroove/og-products-api';
+import { retrieveOgProduct, createProducts, updateProducts } from './client/og-products-api';
 import { createUUID } from './utils/data-utils';
 
 export const processEventProductPublished = async (payload : CtEventPayload) : Promise<boolean> => {

@@ -3,8 +3,7 @@ import { jest } from '@jest/globals'
 import { processEventProductPublished } from './product-published-processor'
 import * as ProductPublishedProcessor from './product-published-processor'
 import * as ProductsHelper from './helpers/products-helper'
-import { retrieveOgProduct, createProducts, updateProducts } from './ordergroove/og-products-api'
-import * as OgProductsApi from './ordergroove/og-products-api'
+import * as OgProductsApi from './client/og-products-api'
 import { mockOgProductApiResponse, mockOgProducts, mockProductCtEventPayload } from '../mocks/mocks'
 
 jest.mock('./helpers/products-helper', () => {
@@ -12,7 +11,7 @@ jest.mock('./helpers/products-helper', () => {
     extractProductVariants: jest.fn()
   }
 })
-jest.mock('./ordergroove/og-products-api', () => {
+jest.mock('./client/og-products-api', () => {
   return {
     retrieveOgProduct: jest.fn().mockReturnValue(
       {

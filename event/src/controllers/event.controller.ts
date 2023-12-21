@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
-import { CreatedBy, MessageDeliveryPayload, Order, ProductProjection } from '@commercetools/platform-sdk';
 
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
-import { processEventProductPublished } from '../services/product-published-processor';
+import { processEventProductPublished } from '../ordergroove/product-published-processor';
 import { CtEventPayload } from '../types/custom.types';
+import { EventType } from '../ordergroove/utils/event-config';
 
 /**
  * Exposed event POST endpoint.
@@ -34,10 +34,12 @@ export const post = async (request: Request, response: Response) => {
       Buffer.from(message.data, 'base64').toString('utf8').trim()
     );*/
     const payload: CtEventPayload = JSON.parse(
-      Buffer.from(request.body.message.data, 'base64').toString()
+      Buffer.from(request.body.message.data, 'base64').toString('utf8').trim()
     );
 
-    await processEventProductPublished(payload);
+    if (payload.type === EventType.ProductPublished) {
+      await processEventProductPublished(payload);
+    }
 
     // Return the response for the client
     response.status(200).send();
