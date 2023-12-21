@@ -18,7 +18,7 @@ export const retrieveOgProduct = async (product_id: string, executionId: string)
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of retrieving the product ${product_id}`);
+  logger.info(`Starting the process[${executionId}] of retrieving the product ${product_id} from ordergroove.`);
 
   try {
     await fetch(`${retrieveUrl}/${product_id}/`, {
@@ -63,7 +63,7 @@ export const createProducts = async (products: Array<OrdergrooveProduct>, execut
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of creating products: ${JSON.stringify(products)}`);
+  logger.info(`Starting the process[${executionId}] of creating products in ordergroove: ${JSON.stringify(products)}`);
 
   try {
     await fetch(productsBatchCreateUrl, {
@@ -101,7 +101,7 @@ export const updateProducts = async (products: Array<OrdergrooveProduct>, execut
     status: 0
   };
 
-  logger.info(`Starting the process[${executionId}] of updating products: ${JSON.stringify(products)}`);
+  logger.info(`Starting the process[${executionId}] of updating products in ordergroove: ${JSON.stringify(products)}`);
 
   try {
     await fetch(productsBatchUpdateUrl, {
