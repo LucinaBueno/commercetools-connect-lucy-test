@@ -1,6 +1,5 @@
 import { logger } from '../../utils/logger.utils';
 import { OrdergrooveProduct, OrdergrooveApiResponse } from "../../types/custom.types";
-import { createUUID } from '../utils/data-utils';
 
 // TODO ask for the og api host at configuration
 const productsBatchCreateUrl = 'https://staging.restapi.ordergroove.com/products-batch/create/?force_all_fields=false';
