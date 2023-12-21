@@ -38,14 +38,14 @@ export const post = async (request: Request, response: Response) => {
 
     logger.info('Event type received: ' + payload.type);
 
-    execSync('sleep 5'); // wait for the changes to propagate in commercetools
+    execSync('sleep 10'); // wait for the changes to propagate in commercetools
 
     if (payload.type === EventType.ProductPublished) {
       await processEventProductPublished(payload);
     } else if (payload.type === EventType.InventoryEntryCreated ||
       payload.type === EventType.InventoryEntryQuantitySet ||
       payload.type === EventType.InventoryEntryDeleted) {
-      processInventoryEntryEvent(payload);
+      await processInventoryEntryEvent(payload);
     }
 
     // Return the response for the client
