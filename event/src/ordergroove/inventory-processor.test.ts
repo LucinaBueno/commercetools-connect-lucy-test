@@ -1,7 +1,7 @@
 import { jest } from '@jest/globals'
 
-import { processInventoryEntryEvent } from './inventory-entry-processor'
-import * as InventoryEntryProcessor from './inventory-entry-processor'
+import { processInventoryEntryEvent } from './inventory-processor'
+import * as InventoryEntryProcessor from './inventory-processor'
 import * as OgProductsApi from './client/og-products-api'
 import * as CtService from './services/ct-service'
 import {

@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-const { execSync } = require('child_process');
 
 import CustomError from '../errors/custom.error';
 import { logger } from '../utils/logger.utils';
 import { processEventProductPublished } from '../ordergroove/product-published-processor';
 import { CtEventPayload } from '../types/custom.types';
 import { EventType } from '../ordergroove/utils/event-config';
-import { processInventoryEntryEvent } from '../ordergroove/inventory-entry-processor';
+import { processInventoryEntryEvent } from '../ordergroove/inventory-processor';
 
 /**
  * Exposed event POST endpoint.
@@ -38,13 +37,11 @@ export const post = async (request: Request, response: Response) => {
 
     logger.info('Event type received: ' + payload.type);
 
-    execSync('sleep 10'); // wait for the changes to propagate in commercetools
-
     if (payload.type === EventType.ProductPublished) {
       await processEventProductPublished(payload);
     } else if (payload.type === EventType.InventoryEntryCreated ||
-      payload.type === EventType.InventoryEntryQuantitySet ||
-      payload.type === EventType.InventoryEntryDeleted) {
+        payload.type === EventType.InventoryEntryQuantitySet ||
+        payload.type === EventType.InventoryEntryDeleted) {
       await processInventoryEntryEvent(payload);
     }
 

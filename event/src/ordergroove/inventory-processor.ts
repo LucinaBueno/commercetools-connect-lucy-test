@@ -1,4 +1,5 @@
 import { ProductVariant } from '@commercetools/platform-sdk';
+const { execSync } = require('child_process');
 
 import { logger } from '../utils/logger.utils';
 import { CtEventPayload, OrdergrooveProduct, OrdergrooveApiResponse } from '../types/custom.types';
@@ -9,6 +10,8 @@ import { isProductOnStock } from './helpers/products-helper';
 
 
 export const processInventoryEntryEvent = async (payload: CtEventPayload): Promise<boolean> => {
+  execSync('sleep 10'); // wait for the changes to propagate in commercetools
+
   const execution_id = createUUID();
 
   try {
